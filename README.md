@@ -15,3 +15,4 @@ A data pipeline that analyzes 10,000 real ChatGPT conversations (from the Huggin
 - **Recommendation:** Route low-complexity prompts to GPT-3.5 to reduce baseline costs.
 
 ## Dashboard Preview
+![Dashboard](dashboard.png)
