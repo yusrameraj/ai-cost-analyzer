@@ -5,16 +5,17 @@ import pandas as pd
 conn = sqlite3.connect("ai_costs.db")
 
 # 2. Write the SQL query as a string
-query = query = """
-SELECT 
-    model, 
-    COUNT(*) AS total_calls, 
+query = """
+SELECT
+    model,
+    COUNT(*) AS total_calls,
     ROUND(SUM(cost_usd), 2) AS total_cost,
-    
+    ROUND(SUM(cost_usd) / COUNT(*), 5) AS avg_cost_per_call,
+
     SUM(CASE WHEN useful = 0 THEN 1 ELSE 0 END) AS waste_calls,
     ROUND(100.0 * SUM(CASE WHEN useful = 0 THEN 1 ELSE 0 END) / COUNT(*), 1) AS waste_pct,
     ROUND(SUM(CASE WHEN useful = 0 THEN cost_usd ELSE 0 END), 2) AS wasted_spend
-    
+
 FROM calls
 GROUP BY model
 """
